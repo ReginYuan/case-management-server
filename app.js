@@ -16,6 +16,7 @@ const roles = require('./routes/roles')
 const depts = require('./routes/depts')
 const leave = require('./routes/leave')
 const cases = require('./routes/cases')
+const adjustment = require('./routes/adjustment')
 
 // error handler
 onerror(app)
@@ -60,6 +61,7 @@ router.use(roles.routes(), roles.allowedMethods())
 router.use(depts.routes(), depts.allowedMethods())
 router.use(leave.routes(), leave.allowedMethods())
 router.use(cases.routes(), cases.allowedMethods())
+router.use(adjustment.routes(), adjustment.allowedMethods())
 app.use(router.routes(), router.allowedMethods())
 
 // error-handling
