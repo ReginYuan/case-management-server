@@ -1,9 +1,18 @@
 const router = require("koa-router")();
 const util = require("../utils/util");
 const cases = require("./../models/casesSchema");
-const caseConnection = require("./../models/caseConnectionSchema");
-const mongoose = require('mongoose')
+// const caseConnection = require("./../models/caseConnectionSchema");
+const mongoose = require("mongoose");
+const config = require("../config/index");
 router.prefix("/cases");
+
+
+// Get the next sequence number formatted as a 3-digit string
+async function getNextSequenceValue() {
+  const count = await cases.countDocuments(); // Get the total count of existing cases
+  return (count + 1).toString().padStart(3, '0');
+}
+
 
 //所有案件列表
 router.get("/list", async (ctx) => {
@@ -25,20 +34,27 @@ router.post("/operate", async (ctx) => {
   let res, info;
   try {
     if (action == "create") {
-      const doc = await caseConnection.findOneAndUpdate(
-        { _id: "caseId" },
-        { $inc: { sequence_value: 1 } },
-        { new: true }
-      );
-      if (doc && doc.sequence_value) {
+      const currentDate = caseDate.replace(/-/g, ''); // Format as YYYYMMDD
+      const sequenceNumber = await getNextSequenceValue();
+      const caseIdnew = `${currentDate}${sequenceNumber}`;
+      if (caseDate && caseIdnew) {
         let params = {
           caseDate,
           caseName,
           caseDescribe,
-          caseId: doc.sequence_value
+          caseId: caseIdnew
         };
         await cases.create(params);
-        mongoose.db(caseName)
+        // Create a new MongoDB connection for the new caseName
+        mongoose.createConnection(config.urlConfig + caseName);
+        const newDBConnection = mongoose.createConnection(
+          config.urlConfig + caseName
+        );
+        const DummyModel = newDBConnection.model(
+          "Dummy",
+          new mongoose.Schema({})
+        );
+        await DummyModel.create({});
         info = "创建成功";
       } else {
         info = "创建失败";
