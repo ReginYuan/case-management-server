@@ -8,6 +8,9 @@ dependencies:
   '@clickhouse/client':
     specifier: ^0.2.6
     version: 0.2.6
+  '@koa/cors':
+    specifier: ^4.0.0
+    version: 4.0.0
   clickhouse:
     specifier: ^2.6.0
     version: 2.6.0
@@ -20,6 +23,9 @@ dependencies:
   koa:
     specifier: ^2.7.0
     version: 2.14.2
+  koa-body:
+    specifier: ^4.2.0
+    version: 4.2.0
   koa-bodyparser:
     specifier: ^4.2.1
     version: 4.4.1
@@ -120,6 +126,13 @@ packages:
       wrap-ansi-cjs: /wrap-ansi@7.0.0
     dev: false
 
+  /@koa/cors@4.0.0:
+    resolution: {integrity: sha512-Y4RrbvGTlAaa04DBoPBWJqDR5gPj32OOz827ULXfgB1F7piD1MB/zwn8JR2LAnvdILhxUbXbkXGWuNVsFuVFCQ==}
+    engines: {node: '>= 14.0.0'}
+    dependencies:
+      vary: 1.1.2
+    dev: false
+
   /@one-ini/wasm@0.1.1:
     resolution: {integrity: sha512-XuySG1E38YScSJoMlqovLru4KTUNSjgVTIjyh7qMX6aNN5HY5Ct5LhRJdxO79JtTzKfzV/bnWpz+zquYrISsvw==}
     dev: false
@@ -133,6 +146,12 @@ packages:
 
   /@types/bson@4.0.5:
     resolution: {integrity: sha512-vVLwMUqhYJSQ/WKcE60eFqcyuWse5fGH+NMAXHuKrUAPoryq3ATxk5o4bgYNtg5aOM4APVg7Hnb3ASqUYG0PKg==}
+    dependencies:
+      '@types/node': 20.9.4
+    dev: false
+
+  /@types/formidable@1.2.8:
+    resolution: {integrity: sha512-6psvrUy5VDYb+yaPJReF1WrRsz+FBwyJutK9Twz1Efa27tm07bARNIkK2B8ZPWq80dXqpKfrxTO96xrtPp+AuA==}
     dependencies:
       '@types/node': 20.9.4
     dev: false
@@ -576,6 +595,15 @@ packages:
       uuid: 3.4.0
     dev: false
     bundledDependencies: []
+
+  /co-body@5.2.0:
+    resolution: {integrity: sha512-sX/LQ7LqUhgyaxzbe7IqwPeTr2yfpfUIQ/dgpKo6ZI4y4lpQA0YxAomWIY+7I7rHWcG02PG+OuPREzMW/5tszQ==}
+    dependencies:
+      inflation: 2.1.0
+      qs: 6.11.2
+      raw-body: 2.5.2
+      type-is: 1.6.18
+    dev: false
 
   /co-body@6.1.0:
     resolution: {integrity: sha512-m7pOT6CdLN7FuXUcpuz/8lfQ/L77x8SchHCF4G0RBTJO20Wzmhn5Sp4/5WsKy8OSpifBSUrmg83qEqaDHdyFuQ==}
@@ -1243,6 +1271,11 @@ packages:
       mime-types: 2.1.35
     dev: false
 
+  /formidable@1.2.6:
+    resolution: {integrity: sha512-KcpbcpuLNOwrEjnbpMC0gS+X8ciDoZE1kkqzat4a8vrprf+s9pKNQ/QIwWfbfs4ltgmFl3MD177SNTkve3BwGQ==}
+    deprecated: 'Please upgrade to latest, formidable@v2 or formidable@v3! Check these notes: https://bit.ly/2ZEqIau'
+    dev: false
+
   /frac@1.1.2:
     resolution: {integrity: sha512-w/XBfkibaTl3YDqASwfDUqkna4Z2p9cFSr1aHDt0WoMTECnRfBOv2WArlZILlqgWlmdIlALXGpM2AOhEk5W3IA==}
     engines: {node: '>=0.8'}
@@ -1899,6 +1932,14 @@ packages:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /koa-body@4.2.0:
+    resolution: {integrity: sha512-wdGu7b9amk4Fnk/ytH8GuWwfs4fsB5iNkY8kZPpgQVb04QZSv85T0M8reb+cJmvLE8cjPYvBzRikD3s6qz8OoA==}
+    dependencies:
+      '@types/formidable': 1.2.8
+      co-body: 5.2.0
+      formidable: 1.2.6
+    dev: false
 
   /koa-bodyparser@4.4.1:
     resolution: {integrity: sha512-kBH3IYPMb+iAXnrxIhXnW+gXV8OTzCu8VPDqvcDHW9SQrbkHmqPQtiZwrltNmSq6/lpipHnT7k7PsjlVD7kK0w==}

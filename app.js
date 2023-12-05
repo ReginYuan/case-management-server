@@ -4,10 +4,10 @@ const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
+const koaBody = require('koa-body');
 const logger = require('koa-logger')
 const log4js = require('./utils/log4j')
 const router = require('koa-router')()
-const jwt = require('jsonwebtoken')
 const koajwt = require('koa-jwt')
 const util = require('./utils/util')
 const users = require('./routes/users')
@@ -24,9 +24,14 @@ onerror(app)
 require('./config/db')
 
 // middlewares
-app.use(bodyparser({
-  enableTypes: ['json', 'form', 'text']
-}))
+// app.use(bodyparser({
+//   enableTypes: ['json', 'form', 'text','excel']
+// }))
+
+app.use(koaBody({
+  enableTypes: [ 'json', 'form', 'text', 'xml','excel' ]
+}));
+
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))

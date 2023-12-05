@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const config = require('./index')
 const log4js = require('./../utils/log4j')
 
-mongoose.connect(config.URL,{
+mongoose.connect(config.urlConfig,{
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -19,3 +19,5 @@ db.on('error',()=>{
 db.on('open',()=>{
     log4js.info('***mongoose 数据库连接成功***')
 })
+
+module.exports = db;

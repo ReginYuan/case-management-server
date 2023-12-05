@@ -2,6 +2,7 @@ const router = require("koa-router")();
 const util = require("../utils/util");
 const cases = require("./../models/casesSchema");
 const caseConnection = require("./../models/caseConnectionSchema");
+const mongoose = require('mongoose')
 router.prefix("/cases");
 
 //所有案件列表
@@ -37,6 +38,7 @@ router.post("/operate", async (ctx) => {
           caseId: doc.sequence_value
         };
         await cases.create(params);
+        mongoose.db(caseName)
         info = "创建成功";
       } else {
         info = "创建失败";
